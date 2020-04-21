@@ -38,6 +38,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
         }
     } else {
         session.invalidate();
+        session.sendRedirect("/attributeServlet");
         return;
     }
 
@@ -68,6 +69,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
 
    out.println(" <br><input type=\"checkbox\" name=\"attrib_remove\">Remove");
    out.println(" <input type=\"submit\" name=\"update\" value=\"Update\">");
+   out.println(" <input type=\"submit\" name=\"Invalidate\" value=\"Invalidate\">");
    out.println("</form>");
       String lifeCycleURL = "";
       out.print  ("<a href=\"" + lifeCycleURL + "?action=invalidate\">");
