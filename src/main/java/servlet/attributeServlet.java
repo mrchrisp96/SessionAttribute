@@ -21,7 +21,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
    String name   = request.getParameter("attrib_name");
    String value  = request.getParameter("attrib_value");
    String remove = request.getParameter("attrib_remove");
-    String invalidate = request.getParameter("attrib_invalidate");
+   String invalidate = request.getParameter("invalidate");
 
     if(invalidate == null) {
         if (remove != null && remove.equals("on"))
