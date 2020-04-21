@@ -37,8 +37,29 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
 
         }
     } else {
-        session.invalidate();
-        return;
+      HttpSession session = request.getSession();
+      session.invalidate();
+
+      response.setContentType("text/html");
+      PrintWriter out = response.getWriter();
+
+      out.println("<html>");
+      out.println("<head>");
+      out.println(" <title>Session lifecycle</title>");
+      out.println("</head>");
+      out.println("");
+      out.println("<body>");
+
+      out.println("<p>Your session has been invalidated.</P>");
+
+      // Create a link so the user can create a new session.
+      // The link will have a parameter builtin
+      String lifeCycleURL = "/offutt/servlet/sessionLifeCycle";
+      out.println("<a href=\"" + lifeCycleURL + "?action=newSession\">");
+      out.println("Create new session</A>");
+      out.println("</body>");
+      out.println("</html>");
+      out.close();
     }
 
    response.setContentType("text/html");
@@ -68,7 +89,6 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
 
    out.println(" <br><input type=\"checkbox\" name=\"attrib_remove\">Remove");
    out.println(" <input type=\"submit\" name=\"update\" value=\"Update\">");
-   out.println(" <input type=\"submit\" name=\"attrib_invalidate\" value=\"Invalidate\">");
    out.println("</form>");
       String lifeCycleURL = "";
       out.print  ("<a href=\"" + lifeCycleURL + "?action=invalidate\">");
