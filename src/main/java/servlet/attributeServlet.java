@@ -21,7 +21,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
    String name   = request.getParameter("attrib_name");
    String value  = request.getParameter("attrib_value");
    String remove = request.getParameter("attrib_remove");
-    String invalidate = request.getParameter("Invalidate");
+    String invalidate = request.getParameter("attrib_invalidate");
 
     if(invalidate == null) {
         if (remove != null && remove.equals("on"))
@@ -38,7 +38,6 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
         }
     } else {
         session.invalidate();
-        session.sendRedirect("/attributeServlet");
         return;
     }
 
@@ -69,7 +68,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
 
    out.println(" <br><input type=\"checkbox\" name=\"attrib_remove\">Remove");
    out.println(" <input type=\"submit\" name=\"update\" value=\"Update\">");
-   out.println(" <input type=\"submit\" name=\"Invalidate\" value=\"Invalidate\">");
+   out.println(" <input type=\"submit\" name=\"attrib_invalidate\" value=\"Invalidate\">");
    out.println("</form>");
       String lifeCycleURL = "";
       out.print  ("<a href=\"" + lifeCycleURL + "?action=invalidate\">");
