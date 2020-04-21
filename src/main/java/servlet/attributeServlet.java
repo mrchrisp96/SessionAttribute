@@ -21,19 +21,25 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
    String name   = request.getParameter("attrib_name");
    String value  = request.getParameter("attrib_value");
    String remove = request.getParameter("attrib_remove");
+    String invalidate = request.getParameter("Invalidate");
 
-   if (remove != null && remove.equals("on"))
-   {
-      session.removeAttribute(name);
-   }
-   else
-   {
-      if ((name != null && name.length() > 0) && (value != null && value.length() > 0))
-      {
-         session.setAttribute(name, value);
-      }
+    if(invalidate == null) {
+        if (remove != null && remove.equals("on"))
+        {
+          session.removeAttribute(name);
+        }
+        else
+        {
+          if ((name != null && name.length() > 0) && (value != null && value.length() > 0))
+          {
+             session.setAttribute(name, value);
+          }
 
-   }
+        }
+    } else {
+        session.invalidate();
+        return;
+    }
 
    response.setContentType("text/html");
    PrintWriter out = response.getWriter();
@@ -63,9 +69,10 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
    out.println(" <br><input type=\"checkbox\" name=\"attrib_remove\">Remove");
    out.println(" <input type=\"submit\" name=\"update\" value=\"Update\">");
    out.println("</form>");
-    out.print  ("<a href=\"?action=invalidate\">");
-    out.println("Invalidate the session</a>");
-    out.print  ("<br><a href=\"\">");
+      String lifeCycleURL = "";
+      out.print  ("<br><br><a href=\"" + lifeCycleURL + "?action=invalidate\">");
+      out.println("Invalidate the session</a>");
+      out.print  ("<br><a href=\"" + lifeCycleURL + "\">");
    out.println("<hr>");
 
    out.println("Attributes in this session:");
@@ -80,6 +87,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
       out.print  ("<br><b>Value:</b> ");
       out.println(att_value);
    } //end while
+    
 
    out.println("</body>");
    out.println("</html>");
