@@ -37,7 +37,6 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
 
         }
     } else {
-      HttpSession session = request.getSession();
       session.invalidate();
 
       response.setContentType("text/html");
