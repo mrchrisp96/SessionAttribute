@@ -63,6 +63,10 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
    out.println(" <br><input type=\"checkbox\" name=\"attrib_remove\">Remove");
    out.println(" <input type=\"submit\" name=\"update\" value=\"Update\">");
    out.println("</form>");
+    String lifeCycleURL = "/offutt/servlet/sessionLifeCycle";
+    out.print  ("<br><br><a href=\"" + lifeCycleURL + "?action=invalidate\">");
+    out.println("Invalidate the session</a>");
+    out.print  ("<br><a href=\"" + lifeCycleURL + "\">");
    out.println("<hr>");
 
    out.println("Attributes in this session:");
