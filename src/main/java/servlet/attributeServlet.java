@@ -21,11 +21,11 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
    String name   = request.getParameter("attrib_name");
    String value  = request.getParameter("attrib_value");
    String remove = request.getParameter("attrib_remove");
-   String invalidate = request.getParameter("invalidate");
+   String action = request.getParameter("action");
 
     if (remove != null && remove.equals("on")) {
       session.removeAttribute(name);
-    } else if(invalidate != null) {
+    } else if(action != null && action.equals("invalidate")) {
         session.invalidate();
     } else {
       if ((name != null && name.length() > 0) && (value != null && value.length() > 0))
@@ -33,6 +33,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
          session.setAttribute(name, value);
       }
     }
+
 
 
    response.setContentType("text/html");
